@@ -4,14 +4,15 @@
   writeShellScriptBin,
   lib,
   trino,
+  port ? 8080,
   ...
 }:
 let
   config = writeText "config.properties" ''
     coordinator=true
     node-scheduler.include-coordinator=true
-    http-server.http.port=8080
-    discovery.uri=http://localhost:8080
+    http-server.http.port=${toString port}
+    discovery.uri=http://localhost:${toString port}
     catalog.management=dynamic
     catalog.store=memory
   '';
